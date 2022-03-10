@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const { toString, createLi, createIcon, createAnchor } = require('./tools');
+const { toString, createLi, createIcon, createAnchor } = require('../tools');
 const testProps = {
   id: 1,
   bg: 'bg-black',
@@ -12,7 +12,7 @@ const testProps = {
 const github = createAnchor(`https://github.com/${testProps.user}`, testProps.user);
 testProps.listItems = createLi(`GitHub: ${github}`, testProps.user);
 
-const Engineer = require('../src/Employees/Engineer');
+const Engineer = require('../../src/Employees/Engineer');
 
 describe('Engineer Class', () => {
   const engineer = new Engineer();

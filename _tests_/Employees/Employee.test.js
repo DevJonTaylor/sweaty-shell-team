@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
-const Employee = require('../src/Employees/Employee');
-const { toString } = require('./tools');
+const Employee = require('../../src/Employees/Employee');
+const { toString } = require('../tools');
 const testProps = {
   id: 4,
   name: 'Errol Barg',

@@ -15,7 +15,7 @@ function randomizeGradient() {
   ];
 
   const rand = randomNode(gradients);
-  return gradient[gradients[rand]].multiline;
+  return gradient[rand].multiline;
 }
 
 /**

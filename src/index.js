@@ -1,4 +1,5 @@
 const splash = require('./splash');
+const { prompt } = require('inquirer');
 
 function start() {
   splash()
