@@ -7,7 +7,6 @@
     "lib": "lib"
   },
   "scripts": {
-    "lint": "eslint ./",
     "test": "jest"
   },
   "repository": {
@@ -15,7 +14,7 @@
     "url": "git+https://github.com/DevJonTaylor/sweaty-shell-team.git"
   },
   "keywords": [],
-  "author": "Jon Taylor",
+  "author": "",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/DevJonTaylor/sweaty-shell-team/issues"
@@ -24,11 +23,9 @@
   "devDependencies": {
     "eslint": "^8.10.0",
     "eslist": "^1.0.0-beta.1",
-    "gradient-string": "^2.0.0",
     "jest": "^27.5.1"
   },
   "dependencies": {
-    "inquirer": "^8.2.0",
-    "nanoid": "^3.3.1"
+    "inquirer": "^8.2.0"
   }
 }
