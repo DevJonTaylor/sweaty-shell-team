@@ -1,26 +1,34 @@
 /* eslint-disable no-undef */
-
+const { toString, createLi, createIcon } = require('./tools');
 const testProps = {
   id: 2,
   name: 'Viv Ricci',
+  bg: 'bg-success',
   email: 'vricci1@reference.com',
-  user: 'vricci1',
   school: 'Minot State University',
-  officeNumber: '350-493-8901',
-  role: 'Intern'
+  role: 'Intern',
+  roleIcon: createIcon('book-half')
 };
-
+testProps.listItems = createLi(`School: ${testProps.school}`, testProps.school);
 const Intern = require('../src/Employees/Intern');
 
 describe('Intern Class', () => {
   const intern = new Intern();
 
-  test('Intern\'s get and set methods for github.', () => {
+  test('Interns get and set methods for github.', () => {
     intern.setSchool(testProps.school);
     expect(intern.getSchool()).toBe(testProps.school);
   });
 
-  test('Intern\'s getRole method.', () => {
+  test('Interns getRole method.', () => {
     expect(intern.getRole()).toBe(testProps.role);
+  });
+
+  test('Employees toString method', () => {
+    intern.setName(testProps.name);
+    intern.setEmail(testProps.email);
+    intern.setId(testProps.id);
+    intern.setSchool(testProps.school);
+    expect(intern.toString()).toBe(toString(testProps));
   });
 });

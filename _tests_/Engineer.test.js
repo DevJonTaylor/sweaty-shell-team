@@ -1,26 +1,36 @@
 /* eslint-disable no-undef */
+const { toString, createLi, createIcon, createAnchor } = require('./tools');
 const testProps = {
   id: 1,
-  first_name: 'Juana',
-  last_name: 'Sommerscales',
+  bg: 'bg-black',
+  name: 'Juana Sommerscales',
   email: 'jsommerscales0@liveinternet.ru',
   user: 'jsommerscales0',
-  school: 'Hanseo University',
-  officeNumber: '560-738-4635',
-  role: 'Engineer'
+  role: 'Engineer',
+  roleIcon: createIcon('github')
 };
-const Engineer = require('../src/Employees/Engineer');
+const github = createAnchor(`https://github.com/${testProps.user}`, testProps.user);
+testProps.listItems = createLi(`GitHub: ${github}`, testProps.user);
 
+const Engineer = require('../src/Employees/Engineer');
 
 describe('Engineer Class', () => {
   const engineer = new Engineer();
 
-  test('Engineer\'s get and set methods for github.', () => {
+  test('Engineers get and set methods for github.', () => {
     engineer.setGithub(testProps.user);
     expect(engineer.getGithub()).toBe(testProps.user);
   });
 
-  test('Engineer\'s getRole method.', () => {
+  test('Engineers getRole method.', () => {
     expect(engineer.getRole()).toBe(testProps.role);
+  });
+
+  test('Engineers toString method.', () => {
+    engineer.setName(testProps.name);
+    engineer.setEmail(testProps.email);
+    engineer.setId(testProps.id);
+    engineer.setGithub(testProps.user);
+    expect(engineer.toString()).toBe(toString(testProps));
   });
 });
