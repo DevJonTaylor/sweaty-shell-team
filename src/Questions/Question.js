@@ -29,8 +29,8 @@ class Question {
    * If a parameter is not provided it will return the current message value.
    * If a parameter is provided it will return this for chaining.
    * @param message {undefined | string}
-   * @type {((message: undefined) => string) & ((message: string) => Question)}
-   * @return {Question | string}
+   * @type {((message: undefined) => string) & ((message: string) => this)}
+   * @return {this | string}
    * @example
    * const question = new Question('hello');
    * question
@@ -56,7 +56,7 @@ class Question {
    * If a value is provided it will return this for chaining.
    * @param _default {undefined | string}
    * @type {((message: undefined) => string) & ((message: string) => Question)}
-   * @returns {string | Question}
+   * @returns {string | this}
    * @example
    * const question = new Question('Hello');
    * question
@@ -88,7 +88,7 @@ class Question {
    *    If they return a string it will provide that message as an error message allowing to try again.
    * @param {undefined|string|function(string): boolean|string} validate
    * @type {function(validate: undefined): function(value: string): boolean|string | function(validate: function(string): boolean): Question}
-   * @return {Question|string|function(value: string): (boolean|string)}
+   * @return {this|string|function(value: string): (boolean|string)}
    * @example
    * const question = new Question('hello');
    * question
@@ -115,7 +115,7 @@ class Question {
 
   /**
    * Setups an empty response check in the validation section.
-   * @returns {Question}
+   * @returns {this}
    */
   get validateEmpty() {
     const name = this._originalName;

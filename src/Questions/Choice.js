@@ -18,7 +18,7 @@ class Choice {
 
   /**
    * Create a new Choice object
-   * @param { string } name - The name of the choice.
+   * @param {string} name
    */
   constructor(name) {
     if(isUndefined(name)) throw new Error('Choice requires a name.  You must provide one when creating a new one.');
@@ -26,11 +26,13 @@ class Choice {
   }
 
   /**
-   * Set the name of the function
-   * @param {string|undefined}value - The value to set the name to.
-   * @returns {Choice|string}.
+   * Sets the name string and returns this for chaining.
+   * If nothing is provided in the parameter then it returns the name.
+   * @param {string | undefined} value - The value to set the name to.
+   * @type {function(value: undefined): string | function(value: string): Choice}
+   * @returns {Choice | string}
    */
-  name(value) {
+  name(value = undefined) {
     if(isUndefined(value)) return this._name;
     this._name = value;
 
@@ -38,15 +40,29 @@ class Choice {
   }
 
   /**
-   * *If no value is passed in, return the current value.
-   * *If a value is passed in, set the current value to the camel cased version of the value and return
-   * this
-   * @param {string|undefined} value - The value to set the property to.
-   * @returns {Choice|string}
+   * If no value is passed in, return the current value.
+   * If a value is passed in, set the current value to the camel cased version of the value and return
+   * @param {string | undefined} value
+   * @type {function(value: string): Choice | function(value: undefined): string}
+   * @returns {Choice | string}
    */
-  value(value) {
+  value(value = undefined) {
     if(typeof value === 'undefined') return this._value;
     this._value = camelCase(value);
+
+    return this;
+  }
+
+  /**
+   * If the key parameter is not provided it will return the current value.
+   * Otherwise, it will set the value provided and return this for chaining.
+   * @param {string | undefined} key
+   * @type { function(key: undefined): string | function(key: string): Choice}
+   * @returns {Choice | string}
+   */
+  key(key = undefined) {
+    if(isUndefined(key)) return this._key;
+    this._key = key;
 
     return this;
   }
@@ -62,6 +78,7 @@ class Choice {
   /**
    * The `checked` property is a getter and setter.
    * It toggles between true and false.
+   * It returns Choice for chaining.
    * @returns {Choice}.
    */
   get checked() {
@@ -71,7 +88,7 @@ class Choice {
   }
 
   /**
-   * Returns a boolean value that indicates whether the button is disabled
+   * Returns a boolean value that indicates whether the choice is disabled.
    * @returns {boolean}.
    */
   get isDisabled() {
@@ -81,7 +98,7 @@ class Choice {
   /**
    * The `disabled` property is set to the opposite of its current value.
    * It toggles between true and false.
-   *
+   * It returns Choice for chaining.
    * @returns {Choice}.
    */
   get disabled() {
@@ -91,20 +108,8 @@ class Choice {
   }
 
   /**
-   * If the key parameter is not provided it will return the current value.
-   * Otherwise, it will set the value provided and return this for chaining.
-   * @param {string|undefined} key
-   * @returns {Choice|string}
-   */
-  key(key = undefined) {
-    if(isUndefined(key)) return this._key;
-    this._key = key;
-
-    return this;
-  }
-
-  /**
-   *
+   * If value and key are not set and checked and disabled are set to false then this will return name and value.
+   * It will use the name as the value and make the name camelCase.
    * @returns {{
    *    name: string,
    *    value: string,
