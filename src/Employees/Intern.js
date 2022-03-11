@@ -15,6 +15,17 @@ module.exports = class Intern extends Employee {
     this.school = school;
   }
 
+  get basicObject() {
+    return super.toObject;
+  }
+
+  get toObject() {
+    return {
+      ...super.toObject,
+      School: this.school
+    };
+  }
+
   get render() {
     const superArray = super.render;
     superArray.push(this.getListItem('School', this.school));

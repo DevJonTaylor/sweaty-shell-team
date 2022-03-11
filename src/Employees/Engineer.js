@@ -16,6 +16,17 @@ module.exports = class Engineer extends Employee {
     this.github = github;
   }
 
+  get basicObject() {
+    return super.toObject;
+  }
+
+  get toObject() {
+    return {
+      ...super.toObject,
+      GitHub: this.github
+    };
+  }
+
   get render() {
     const superArray = super.render;
     const gh = this.getAnchor(this.github, `https://github.com/${this.github}`);
