@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const { toString, createLi, createIcon } = require('./tools');
+const { toString, createLi, createIcon } = require('../tools');
 const testProps = {
   id: 2,
   name: 'Viv Ricci',
@@ -10,7 +10,7 @@ const testProps = {
   roleIcon: createIcon('book-half')
 };
 testProps.listItems = createLi(`School: ${testProps.school}`, testProps.school);
-const Intern = require('../src/Employees/Intern');
+const Intern = require('../../src/Employees/Intern');
 
 describe('Intern Class', () => {
   const intern = new Intern();

@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const { toString, createLi, createIcon } = require('./tools');
+const { toString, createLi, createIcon } = require('../tools');
 const testProps = {
   id: 3,
   bg: 'bg-info',
@@ -11,7 +11,7 @@ const testProps = {
 };
 const listItems = [ createLi(`Office Number: ${testProps.officeNumber}`, testProps.officeNumber) ];
 testProps.listItems = listItems.join('\n');
-const Manager = require('../src/Employees/Manager');
+const Manager = require('../../src/Employees/Manager');
 
 describe('Manager Class', () => {
   const manager = new Manager();
