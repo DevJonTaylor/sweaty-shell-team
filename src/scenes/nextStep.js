@@ -10,7 +10,10 @@ const {resolve} = require('path');
 const employees = [];
 const displayEmployees = [];
 
-const validateEmpty = input => input.validateEmpty;
+const validateEmpty = question => question.validateEmpty;
+const validateEmail = question => question.validate(email => /^.+@[^.].*\.[a-z]{2,}$/.test(email)
+  ? true
+  : 'Please provide a valid email address.');
 
 async function nextStep(employee) {
   employees.push(employee);
@@ -38,7 +41,7 @@ async function nextStep(employee) {
 async function addEngineer() {
   const data = await QFactory.input('set id', 'What is the employee ID of your Engineer?', validateEmpty)
     .input('set name', 'What is their name?', validateEmpty)
-    .input('set email', 'What is their email address?', validateEmpty)
+    .input('set email', 'What is their email address?', validateEmail)
     .input('set github', 'What is their GitHub User name?', validateEmpty)
     .answers;
 
@@ -51,7 +54,7 @@ async function addEngineer() {
 async function addIntern() {
   const data = await QFactory.input('set id', 'What is the employee ID of your Intern?', validateEmpty)
     .input('set name', 'What is their name?', validateEmpty)
-    .input('set email', 'What is their email address?', validateEmpty)
+    .input('set email', 'What is their email address?', validateEmail)
     .input('set school', 'What school did they attend?', validateEmpty)
     .answers;
 
