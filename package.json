@@ -28,7 +28,10 @@
     "jest": "^27.5.1"
   },
   "dependencies": {
+    "cli-spinners": "^2.6.1",
+    "cli-table": "^0.3.11",
     "inquirer": "^8.2.0",
-    "nanoid": "^3.3.1"
+    "nanoid": "^3.3.1",
+    "spinnies": "^0.5.1"
   }
 }

@@ -1,9 +1,9 @@
-const splash = require('./splash');
+const {showSplash} = require('./splash');
 const start = require('./scenes/start');
 const nextStep = require('./scenes/nextStep');
 function begin() {
-  const employees = [];
-  splash()
+
+  showSplash()
     .then(start)
     .then(nextStep)
     .catch(console.error);
