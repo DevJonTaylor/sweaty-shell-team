@@ -36,6 +36,12 @@ describe('Question Class', () => {
     expect(question.validateEmpty.isValidate).toBeTruthy();
   });
 
+  test('getter validate Email', () => {
+    expect(question.validateEmail.validate()('jonnytest1101@icloud.com')).toBeTruthy();
+    expect(question.validateEmail.validate()('hello'))
+      .toEqual('Please provide a valid email address.');
+  });
+
   test('getter toObject', () => {
     const obj = {
       type: 'input',
