@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Team</title>
+
+    <!-- bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <style>
+        #my-team-toasts {
+            position: fixed;
+            z-index: 1;
+            inset-inline: 0;
+            inset-block-end: 0;
+            padding-block-end: 5vh;
+            display: grid;
+            align-content: start;
+            justify-content: center;
+            gap: 1vh;
+            pointer-events: none;
+            height: 98%;
+        }
+
+        .my-team-toast {
+            max-inline-size: min(25ch, 90vw);
+            padding-block: .5ch;
+            padding-inline: 1ch;
+            border-radius: 3px;
+            font-size: 1rem;
+            will-change: transform;
+            animation:
+                    fade-in .3s ease,
+                    slide-in .3s ease,
+                    fade-out .3s ease 3s;
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0 }
+        }
+
+        @keyframes fade-out {
+            to { opacity: 0 }
+        }
+
+        @keyframes slide-in {
+            from { transform: translateY(10px) }
+        }
+        .copy-me:hover {
+            cursor: pointer;
+        }
+        #to-be-copied-with {
+            position: absolute;
+            z-index: -1000;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<section id="my-team-toasts"> 
+
+</section>
+<body>
+<div class="container-fluid bg-info text-white">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <h1>My Team</h1>
+    </header>
+</div>
+
+<main class="container">
+    <section class="row justify-content-center">
+        <article class="col-sm-12 col-md-6 col-lg-4 mb-4">
+	<div class="card shadow">
+		<div class="card-header bg-info text-white">
+			<i class="bi bi-clipboard-fill copy-me float-end" data-copy="asd"></i><h3>asd</h3>
+			<h3><i class="bi bi-briefcase-fill"></i> Manager</h3>
+		</div>
+		<div class="card-body">
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">ID: asd<i class="bi bi-clipboard-fill copy-me float-end" data-copy="asd"></i></li>
+				<li class="list-group-item">Email: <a href="mailto:asd" target="_blank">asd</a><i class="bi bi-clipboard-fill copy-me float-end" data-copy="asd"></i></li>
+				<li class="list-group-item">Office Number: asd<i class="bi bi-clipboard-fill copy-me float-end" data-copy="asd"></i></li>
+			</ul>
+		</div>
+	</div>
+</article>
+<article class="col-sm-12 col-md-6 col-lg-4 mb-4">
+	<div class="card shadow">
+		<div class="card-header bg-success text-white">
+			<i class="bi bi-clipboard-fill copy-me float-end" data-copy="asd"></i><h3>asd</h3>
+			<h3><i class="bi bi-book-half"></i> Intern</h3>
+		</div>
+		<div class="card-body">
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">ID: asd<i class="bi bi-clipboard-fill copy-me float-end" data-copy="asd"></i></li>
+				<li class="list-group-item">Email: <a href="mailto:asd" target="_blank">asd</a><i class="bi bi-clipboard-fill copy-me float-end" data-copy="asd"></i></li>
+				<li class="list-group-item">School: asd<i class="bi bi-clipboard-fill copy-me float-end" data-copy="asd"></i></li>
+			</ul>
+		</div>
+	</div>
+</article>
+<article class="col-sm-12 col-md-6 col-lg-4 mb-4">
+	<div class="card shadow">
+		<div class="card-header bg-black text-white">
+			<i class="bi bi-clipboard-fill copy-me float-end" data-copy="asd"></i><h3>asd</h3>
+			<h3><i class="bi bi-github"></i> Engineer</h3>
+		</div>
+		<div class="card-body">
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">ID: asd<i class="bi bi-clipboard-fill copy-me float-end" data-copy="asd"></i></li>
+				<li class="list-group-item">Email: <a href="mailto:asd" target="_blank">asd</a><i class="bi bi-clipboard-fill copy-me float-end" data-copy="asd"></i></li>
+				<li class="list-group-item">GitHub: <a href="https://github.com/asd" target="_blank">asd</a><i class="bi bi-clipboard-fill copy-me float-end" data-copy="asd"></i></li>
+			</ul>
+		</div>
+	</div>
+</article>
+    </section>
+</main>
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<input type="text" id="to-be-copied-with" />
+<script>
+    document.body.addEventListener('click', event => {
+      const el = event.target;
+      if(!el.matches('.copy-me')) return;
+
+      const elText = document.querySelector('#to-be-copied-with');
+      elText.value = el.dataset.copy;
+
+      if(!elText.select) elText.setSelectionRange(0, 99999); // For mobile
+      else elText.select();
+
+      navigator.clipboard.writeText(elText.value);
+      const toasts = document.querySelector('#my-team-toasts');
+      const toast = document.createElement('output');
+      toast.classList.add('my-team-toast', 'text-white', 'bg-success');
+      toast.innerText = 'Copied Successful';
+      toasts.append(toast);
+      console.log(toasts);
+      console.log(toast);
+      setTimeout(() => toast.remove(), 3300);
+    })
+</script>
+</body>
+</html>
