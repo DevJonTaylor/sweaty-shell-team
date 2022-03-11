@@ -94,6 +94,16 @@ class Question {
   }
 
   /**
+   * Assigns a validator to ensure emails entered are valid.
+   * @returns {ValidateType|QuestionTypes}
+   */
+  get validateEmail() {
+    return this.validate(email => /^.+@[^.].*\.[a-z]{2,}$/.test(email)
+      ? true
+      : 'Please provide a valid email address.');
+  }
+
+  /**
    * Checks if default is empty or not.
    * @returns {boolean}
    */

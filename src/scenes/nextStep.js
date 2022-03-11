@@ -11,10 +11,10 @@ const employees = [];
 const displayEmployees = [];
 
 const validateEmpty = question => question.validateEmpty;
-const validateEmail = question => question.validate(email => /^.+@[^.].*\.[a-z]{2,}$/.test(email)
-  ? true
-  : 'Please provide a valid email address.');
-
+const validateEmail = question => question.validateEmail;
+const validateId = question => question.validate(id => employees.find(emp => emp.id === id)
+  ? 'Please provide a unique Employee ID.'
+  : true);
 async function nextStep(employee) {
   employees.push(employee);
   displayEmployees.push(employee.basicObject);
@@ -39,7 +39,7 @@ async function nextStep(employee) {
 }
 
 async function addEngineer() {
-  const data = await QFactory.input('set id', 'What is the employee ID of your Engineer?', validateEmpty)
+  const data = await QFactory.input('set id', 'What is the employee ID of your Engineer?', validateId)
     .input('set name', 'What is their name?', validateEmpty)
     .input('set email', 'What is their email address?', validateEmail)
     .input('set github', 'What is their GitHub User name?', validateEmpty)
@@ -52,7 +52,7 @@ async function addEngineer() {
 }
 
 async function addIntern() {
-  const data = await QFactory.input('set id', 'What is the employee ID of your Intern?', validateEmpty)
+  const data = await QFactory.input('set id', 'What is the employee ID of your Intern?', validateId)
     .input('set name', 'What is their name?', validateEmpty)
     .input('set email', 'What is their email address?', validateEmail)
     .input('set school', 'What school did they attend?', validateEmpty)
