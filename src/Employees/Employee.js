@@ -70,6 +70,15 @@ module.exports = class Employee {
     ];
   }
 
+  get toObject() {
+    return {
+      ID: this.id,
+      Name: this.name,
+      Email: this.email,
+      Role: this._role
+    };
+  }
+
   toString() {
     return `<article class="col-sm-12 col-md-6 col-lg-4 mb-4">
 \t<div class="card shadow">

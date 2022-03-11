@@ -15,6 +15,17 @@ module.exports = class Manager extends Employee {
     return this.officeNumber;
   }
 
+  get basicObject() {
+    return super.toObject;
+  }
+
+  get toObject() {
+    return {
+      ...super.toObject,
+      'Office Number': this.officeNumber
+    };
+  }
+
   get render() {
     const superArray = super.render;
     superArray.push(this.getListItem('Office Number', this.officeNumber));
