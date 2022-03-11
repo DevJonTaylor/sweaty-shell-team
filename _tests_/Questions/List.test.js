@@ -68,15 +68,18 @@ describe('List Class', () => {
       choices: [
         { name: 'a', value: 'a' },
         { name: 'b', value: 'b' },
+        new Separator(),
         { name: 'c', value: 'c' }
       ],
       pageSize: 10,
       loop: true
     };
     const list = new List('a new list');
-    list.newChoices(['a', 'b', 'c'])
+    list.newChoices(['a', 'b'])
+      .addSeparator('1')
+      .newChoice('c')
       .highlight
       .message('hello');
-    expect(JSON.stringify(list.toObject)).toBe(JSON.stringify(toBe));
+    expect(list.toObject).toEqual(toBe);
   });
 });

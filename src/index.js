@@ -1,10 +1,12 @@
 const splash = require('./splash');
-const { prompt } = require('inquirer');
-
-function start() {
+const start = require('./scenes/start');
+const nextStep = require('./scenes/nextStep');
+function begin() {
+  const employees = [];
   splash()
-    .then(() => console.log('lets go!'))
+    .then(start)
+    .then(nextStep)
     .catch(console.error);
 }
 
-module.exports = start;
+module.exports = begin;

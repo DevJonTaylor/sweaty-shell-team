@@ -1,7 +1,7 @@
 const Question = require('./Question');
 const Choice = require('./Choice');
 const { Separator } = require('inquirer');
-const {isFunction} = require('../../lib/tools/typeChecks');
+const {isFunction, isUndefined} = require('../../lib/tools/typeChecks');
 
 /**
  * @class
@@ -28,14 +28,14 @@ class List extends Question {
   /**
    * Create a new choice with the given name, and call the callback function with the new choice as an argument.
    * @param {string} name - The name of the choice.
-   * @param {function(choice: Choice): void} callback - A function that will be called when the choice is selected.
+   * @param {function(choice: Choice): void} [callback] - A function that will be called when the choice is selected.
    * @returns {this} For chaining
    */
   newChoice(name, callback) {
     const choice = new Choice(name);
     this._choices.set(name, choice);
 
-    callback(choice);
+    if(!isUndefined(callback)) callback(choice);
     return this;
   }
 
@@ -157,7 +157,10 @@ class List extends Question {
    * @return {{highlight: boolean, loop: boolean, pageSize: number, choices: *[]}}
    */
   get toObject() {
-    const choices = [...this._choices.values()].map(choice => choice.toObject);
+    const choices = [...this._choices.values()].map(choice => {
+      if(choice instanceof Separator) return choice;
+      return choice.toObject;
+    });
     return {
       ...super.toObject,
       highlight: this._highlight,
