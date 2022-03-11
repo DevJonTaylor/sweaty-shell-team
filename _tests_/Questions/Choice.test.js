@@ -37,7 +37,8 @@ describe('Choice Class', () => {
       disabled: true,
       key: '123'
     };
-    choice.key('123').checked.disabled;
-    expect(JSON.stringify(choice.toObject)).toBe(JSON.stringify(objToBe));
+    const c2 = new Choice('I am a choice');
+    c2.key('123').checked.disabled;
+    expect(JSON.stringify(c2.toObject)).toBe(JSON.stringify(objToBe));
   });
 });

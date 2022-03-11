@@ -74,7 +74,7 @@ describe('List Class', () => {
       loop: true
     };
     const list = new List('a new list');
-    list.newChoices(['a', 'b', 'c'], choices => choices)
+    list.newChoices(['a', 'b', 'c'])
       .highlight
       .message('hello');
     expect(JSON.stringify(list.toObject)).toBe(JSON.stringify(toBe));

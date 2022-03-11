@@ -2,12 +2,17 @@ const { camelCase } = require('../../lib/tools/strings');
 const { isUndefined } = require('../../lib/tools/typeChecks');
 
 /**
+ * @typedef {Question | List | Input | Choice} QuestionTypes
+ * @typedef {string | function(value: string): boolean|string} ValidateType
+ */
+
+/**
  * @property {string} _originalName
  * @property {string} _type
  * @property {string} _name
  * @property {string} _message
  * @property {string} _default
- * @property {string|((value: string) => boolean)} _validate
+ * @property {ValidateType} _validate
  */
 class Question {
   _originalName = '';
@@ -17,6 +22,9 @@ class Question {
   _default = '';
   _validate = '';
 
+  /**
+   * @param {string} name
+   */
   constructor(name) {
     if(!name) throw new Error('You must provide a name for the question.');
 
@@ -28,21 +36,10 @@ class Question {
    * This is in nearly every question. It represents what to ask the user.
    * If a parameter is not provided it will return the current message value.
    * If a parameter is provided it will return this for chaining.
-   * @param message {undefined | string}
-   * @type {((message: undefined) => string) & ((message: string) => this)}
-   * @return {this | string}
-   * @example
-   * const question = new Question('hello');
-   * question
-   *  .message('I am a message')
-   *  .toObject
-   * // Will output {
-   *   name: "hello",
-   *   message: "I am a message",
-   *   type: "input"
-   *  } // Type will not actually be input as Question leaves this blank for other classes to override.
+   * @param {string} [message]
+   * @return {(QuestionTypes | string)}
    */
-  message(message = undefined) {
+  message(message) {
     if(isUndefined(message)) return this._message;
     this._message = message;
 
@@ -54,23 +51,10 @@ class Question {
    * It provides a value when the user does not provide one.
    * If a parameter is not provided it will return the current value of default.
    * If a value is provided it will return this for chaining.
-   * @param _default {undefined | string}
-   * @type {((message: undefined) => string) & ((message: string) => Question)}
-   * @returns {string | this}
-   * @example
-   * const question = new Question('Hello');
-   * question
-   *  .message('I am a message')
-   *  .default('no you are not')
-   *  .toObject
-   * // Outputs to this {
-   *   name: "hello",
-   *   message: "I am a message",
-   *   default: "no you are not",
-   *   type: "input"
-   * } // Type will not actually be input as Question leaves this blank for other classes to override.
+   * @param {string} [_default]
+   * @returns {(string | QuestionTypes)}
    */
-  default(_default = undefined) {
+  default(_default) {
     if(isUndefined(_default)) return this._default;
     this._default = _default;
 
@@ -86,23 +70,10 @@ class Question {
    *    If they return false it will simply just tell the user nothing but not proceed.
    *    If they return true it will pass them.
    *    If they return a string it will provide that message as an error message allowing to try again.
-   * @param {undefined|string|function(string): boolean|string} validate
-   * @type {function(validate: undefined): function(value: string): boolean|string | function(validate: function(string): boolean): Question}
-   * @return {this|string|function(value: string): (boolean|string)}
-   * @example
-   * const question = new Question('hello');
-   * question
-   *  .message('I am a message')
-   *  .validate(value => value !== '' ? true : 'Hello must receive a response, it cannot be empty.');
-   *  .toObject
-   * // {
-   *   type: "input",
-   *   name: "hello",
-   *   message: "I am a message",
-   *   validate: (value) => value !== '' ? true : 'Hello must receive a response, it cannot be empty.'
-   * }
+   * @param {ValidateType} [validate]
+   * @return {(ValidateType | QuestionTypes)}
    */
-  validate(validate = undefined) {
+  validate(validate) {
     if(isUndefined(validate)) return this._validate;
     if(typeof(validate) !== 'function') {
       if(validate !== '') throw new Error(`Validate takes a function, received ${typeof(validate)}`);
@@ -115,7 +86,7 @@ class Question {
 
   /**
    * Setups an empty response check in the validation section.
-   * @returns {this}
+   * @returns {QuestionTypes}
    */
   get validateEmpty() {
     const name = this._originalName;
@@ -145,7 +116,7 @@ class Question {
    *    type: string,
    *    message: string,
    *    default?: string,
-   *    validate?: (value: string) => boolean|string
+   *    validate?: ValidateType
    * }}
    */
   get toObject() {

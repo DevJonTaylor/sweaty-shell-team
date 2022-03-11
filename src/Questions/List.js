@@ -1,8 +1,10 @@
 const Question = require('./Question');
 const Choice = require('./Choice');
 const { Separator } = require('inquirer');
+const {isFunction} = require('../../lib/tools/typeChecks');
 
 /**
+ * @class
  * @property {string} _type
  * @property {number} _pageSize
  * @property {Map} _choices
@@ -77,8 +79,8 @@ class List extends Question {
   /**
    * Create a new Choice object for each name in the names array.
    * @param {Array<string>} names - an array of strings that represent the names of the choices.
-   * @param {function({ [name:string]: Choice }): void} callback - A function that will be called with the choices object.
-   * @returns {this} for chaining.
+   * @param {function({ [name:string]: Choice }): void} [callback]
+   * @returns {QuestionTypes} for chaining.
    */
   newChoices(names, callback) {
     const choices = {};
@@ -87,7 +89,7 @@ class List extends Question {
       this._choices.set(name, choices[name]);
     });
 
-    callback(choices);
+    if(isFunction(callback)) callback(choices);
 
     return this;
   }
