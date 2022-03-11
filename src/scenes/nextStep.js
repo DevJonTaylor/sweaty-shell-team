@@ -10,6 +10,7 @@ const {resolve} = require('path');
 const employees = [];
 const displayEmployees = [];
 
+const validateEmpty = input => input.validateEmpty;
 
 async function nextStep(employee) {
   employees.push(employee);
@@ -35,10 +36,10 @@ async function nextStep(employee) {
 }
 
 async function addEngineer() {
-  const data = await QFactory.input('set id', 'What is the employee ID of your Engineer?')
-    .input('set name', 'What is their name?')
-    .input('set email', 'What is their email address?')
-    .input('set github', 'What is their GitHub User name?')
+  const data = await QFactory.input('set id', 'What is the employee ID of your Engineer?', validateEmpty)
+    .input('set name', 'What is their name?', validateEmpty)
+    .input('set email', 'What is their email address?', validateEmpty)
+    .input('set github', 'What is their GitHub User name?', validateEmpty)
     .answers;
 
   const eng = new Engineer();
@@ -48,10 +49,10 @@ async function addEngineer() {
 }
 
 async function addIntern() {
-  const data = await QFactory.input('set id', 'What is the employee ID of your Intern?')
-    .input('set name', 'What is their name?')
-    .input('set email', 'What is their email address?')
-    .input('set school', 'What school did they attend?')
+  const data = await QFactory.input('set id', 'What is the employee ID of your Intern?', validateEmpty)
+    .input('set name', 'What is their name?', validateEmpty)
+    .input('set email', 'What is their email address?', validateEmpty)
+    .input('set school', 'What school did they attend?', validateEmpty)
     .answers;
 
   const intern = new Intern();
@@ -65,7 +66,8 @@ async function finish() {
   const html = await readFile(resolve(__dirname, '../template.html'), 'utf8');
   writeFile(resolve(__dirname, '../../dist/team.html'), html.replace('$$team_members$$', employees.join('\n')), 'utf8')
     .then(() => {
-      spinnies.succeed('spinner-1', {text: `Successfully created ${resolve(__dirname, '../../dist/team.html')}`});
+      spinnies.succeed('spinner-1', {text: 'Successfully created!'});
+      console.log(resolve(__dirname, '../../dist/team.html'));
     })
     .catch(err => {
       spinnies.fail('spinner-1', 'Unable to locate file.');
