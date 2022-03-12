@@ -8,6 +8,7 @@ const { prompt } = require('inquirer');
 
 class QFactory {
   /**
+   * @this {this}
    * @private
    * @type {Map<string, QuestionTypes>} */
   static _collection = new Map();
@@ -17,7 +18,7 @@ class QFactory {
    * @param {QuestionTypes} q
    * @param {string | QuestionCallback} [msg]
    * @param {QuestionCallback} [cb]
-   * @returns {QFactory}
+   * @returns {this}
    * @private
    */
   static _addQuestion(q, msg, cb) {
@@ -59,7 +60,7 @@ class QFactory {
    * Returns a Question to the callback if it exists.  If it does not exist the callback receives null.
    * @param {string} name
    * @param {QuestionCallback} cb
-   * @returns {QFactory}
+   * @returns {this}
    */
   static getQuestion(name, cb) {
     if(!this.hasQuestion(name)) cb(null);
@@ -75,7 +76,7 @@ class QFactory {
    * @param {string} name
    * @param {string | QuestionCallback} [message]
    * @param {QuestionCallback} [cb]
-   * @returns {QFactory}
+   * @returns {this}
    * @example QFactory.input('input question', 'I am a message', (question) => {
    *   question.validateEmpty;
    * });
@@ -93,12 +94,28 @@ class QFactory {
    * @param {string} name
    * @param {string | QuestionCallback} [message]
    * @param {QuestionCallback} [cb]
-   * @return {QFactory}
+   * @return {this}
    */
   static list(name, message, cb) {
     this._addQuestion(new List(name), message, cb);
 
     return this;
+  }
+
+  /**
+   * Provides a callback to validate the Question's response to ensure it is not empty.
+   * @returns {function(q: QuestionTypes): boolean|string}
+   */
+  static get validateEmpty() {
+    return q => q.validateEmpty;
+  }
+
+  /**
+   * Provides a callback to validate the Question's response is a valid email.
+   @returns {function(q: QuestionTypes): boolean|string}
+   */
+  static get validateEmail() {
+    return q => q.validateEmail;
   }
 
   /**

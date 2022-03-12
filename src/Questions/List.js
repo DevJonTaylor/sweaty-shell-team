@@ -2,6 +2,7 @@ const Question = require('./Question');
 const Choice = require('./Choice');
 const { Separator } = require('inquirer');
 const {isFunction, isUndefined} = require('../../lib/tools/typeChecks');
+const {camelCase} = require('../../lib/tools/strings');
 
 /**
  * @class
@@ -85,8 +86,9 @@ class List extends Question {
   newChoices(names, callback) {
     const choices = {};
     names.map(name => {
-      choices[name] = new Choice(name);
-      this._choices.set(name, choices[name]);
+      const camelCaseName = camelCase(name);
+      choices[camelCaseName] = new Choice(name);
+      this._choices.set(name, choices[camelCaseName]);
     });
 
     if(isFunction(callback)) callback(choices);
@@ -108,11 +110,11 @@ class List extends Question {
 
   /**
    * Add a separator to the menu
-   * @param {string} id - The id of the Separator so that you can locate it later.
+   * @param {string|number} id - The id of the Separator so that you can locate it later.
    * @returns {this} for chaining.
    */
   addSeparator(id) {
-    this._choices.set(id, new Separator());
+    this._choices.set(`${id}`, new Separator());
 
     return this;
   }

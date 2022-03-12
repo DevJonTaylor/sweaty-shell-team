@@ -7,7 +7,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "lint": "eslint ./",
+    "lint": "eslint ./**.js --fix",
+    "start": "node index",
     "test": "jest"
   },
   "repository": {
@@ -32,6 +33,7 @@
     "cli-table": "^0.3.11",
     "inquirer": "^8.2.0",
     "nanoid": "^3.3.1",
+    "open": "^8.4.0",
     "spinnies": "^0.5.1"
   }
 }
