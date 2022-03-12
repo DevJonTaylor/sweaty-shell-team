@@ -18,8 +18,14 @@ async function renderAndExit(employees) {
       spinner.pass(`File created successfully here \n\n${htmlPath}`);
     })
     .catch(err => {
-      spinner.fail(err);
-      console.error(err);
+      if(err.message === 'Expected a `name`') {
+        spinner.pass('File created successfully here!');
+        console.log('It would seem that this app cannot open Chrome or it does not exist on your platform.');
+        console.log(`However you can access your team.html file below \n\n${htmlPath}`);
+      } else {
+        spinner.fail(err);
+        console.error(err);
+      }
     });
 }
 

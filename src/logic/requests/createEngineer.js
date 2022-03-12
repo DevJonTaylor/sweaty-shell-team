@@ -10,9 +10,11 @@ async function createEngineer(ids) {
   const eng = new Engineer();
   const answers = await F
     .input('id', 'What is the employee ID of your Engineer?', i => i
-      .validate(v => !ids.find(id => id === v)
-        ? true
-        : 'Please select a Unique Employee ID'
+      .validate(v => v === ''
+        ? 'ID cannot be empty.'
+        : !ids.find(id => id === v)
+          ? true
+          : 'Please select a Unique Employee ID'
       )
     )
     .input('name', 'What is their name?', F.validateEmpty)
