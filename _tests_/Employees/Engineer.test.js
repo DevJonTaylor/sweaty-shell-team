@@ -33,4 +33,17 @@ describe('Engineer Class', () => {
     engineer.setGithub(testProps.user);
     expect(engineer.toString()).toBe(toString(testProps));
   });
+
+  test('getter basicObject', () => {
+    const testData = {
+      'ID': 1047,
+      'Name': 'Lester Stairmand',
+      'Email': 'lstairmand0@engadget.com',
+      'Role': 'Engineer'
+    };
+    engineer.setName(testData.Name);
+    engineer.setEmail(testData.Email);
+    engineer.setId(testData.ID);
+    expect(engineer.basicObject).toEqual(testData);
+  });
 });

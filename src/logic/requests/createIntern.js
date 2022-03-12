@@ -8,7 +8,7 @@ const { Intern } = require('../../Employees');
  */
 async function createIntern(ids) {
   return F
-    .input('id', 'What is the employee ID of your Engineer?', i => i
+    .input('id', 'What is the employee ID of your intern?', i => i
       .validate(v => v === ''
         ? 'ID cannot be empty.'
         : !ids.find(id => id === v)

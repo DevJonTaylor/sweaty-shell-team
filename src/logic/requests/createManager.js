@@ -11,7 +11,12 @@ async function createManager() {
     .input('id', 'What is the Employee ID for the manager?', F.validateEmpty)
     .input('name', 'What is the manager\'s name?', F.validateEmpty)
     .input('email', 'What is the manager\'s email address?', F.validateEmail)
-    .input('Office Number', 'What is the manager\'s office number?', F.validateEmpty)
+    .input('Office Number', 'What is the manager\'s office number?', q => q.validate(v => {
+      if(v === '') return 'Office Number is required.  It cannot be empty.';
+      if(isNaN(v)) return 'Office Number must be a number.';
+
+      return true;
+    }))
     .answers;
 
   manager.setId(answers.id);

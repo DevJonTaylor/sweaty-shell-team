@@ -31,4 +31,17 @@ describe('Intern Class', () => {
     intern.setSchool(testProps.school);
     expect(intern.toString()).toBe(toString(testProps));
   });
+
+  test('getter basicObject', () => {
+    const testData = {
+      'ID': 8880,
+      'Name': 'Raul Sheldrick',
+      'Email': 'rsheldrick1@opensource.org',
+      'Role': 'Intern'
+    };
+    intern.setName(testData.Name);
+    intern.setEmail(testData.Email);
+    intern.setId(testData.ID);
+    expect(intern.basicObject).toEqual(testData);
+  });
 });

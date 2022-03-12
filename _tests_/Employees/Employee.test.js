@@ -35,4 +35,17 @@ describe('Employee Class', () => {
     employee.setId(testProps.id);
     expect(employee.toString()).toBe(toString(testProps));
   });
+
+  test('getCopyIcon function', () => {
+    expect(employee.getCopyIcon('tagged')).toEqual('<i class="bi bi-clipboard-fill copy-me float-end" data-copy="tagged"></i>');
+    expect(employee.getCopyIcon('tagged', false)).toEqual('<i class="bi bi-clipboard-fill copy-me" data-copy="tagged"></i>');
+  });
+
+  test('getAnchor function', () => {
+    const anchor = employee.getAnchor('Hello', 'https://github.com/devjontaylor');
+    const noTargetBlank = employee.getAnchor('Hello', 'https://github.com/devjontaylor', false);
+
+    expect(anchor).toEqual('<a href="https://github.com/devjontaylor" target="_blank">Hello</a>');
+    expect(noTargetBlank).toEqual('<a href="https://github.com/devjontaylor">Hello</a>');
+  });
 });

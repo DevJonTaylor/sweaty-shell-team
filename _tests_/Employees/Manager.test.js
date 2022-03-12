@@ -32,4 +32,17 @@ describe('Manager Class', () => {
     manager.setOfficeNumber(testProps.officeNumber);
     expect(manager.toString()).toBe(toString(testProps));
   });
+
+  test('getter basicObject', () => {
+    const testData = {
+      'ID': 2990,
+      'Name': 'Faustine Ripley',
+      'Email': 'fripley2@wikipedia.org',
+      'Role': 'Manager'
+    };
+    manager.setName(testData.Name);
+    manager.setEmail(testData.Email);
+    manager.setId(testData.ID);
+    expect(manager.basicObject).toEqual(testData);
+  });
 });
