@@ -26,6 +26,8 @@
     * [Chrome Pops Up](#chrome-pops-up)
     * [Copy Employee Data Easily](#copy-employee-data-easily)
 * [Lessons](#lessons)
+    * [First time working with Inquirer](#first-time-working-with-inquirer)
+    * [New to Jest and Unit Tests](#new-to-jest-and-unit-tests)
 * [Contact Me](#contact-me)
 * [License](#license)
 ## Description
