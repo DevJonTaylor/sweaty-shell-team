@@ -271,15 +271,24 @@ npm start
 
 ### First time working with Inquirer
 Generally when it is the first time I work with an API I'll build my own wrapper.  This
-was really beneficial because it allowed me to dig really deep.
+was really beneficial because it allowed me to dig really deep.  I 
+discovered the editor and checkbox features as well.  This is also 
+how I discovered Gradient Strings.  
 
-### First time working with Jest
-What I did to overcome/how it was helpful...
+### New to Jest and Unit Tests
+I have never created a project with Unit Tests before.  
+This was a really amazing concept to me.  Everything was going fine 
+until I had to stub/mock Inquirer.  This was an amazing concept, but 
+I had to dig for it.  This led me to other ways developers used theirs.
+Some believe that you should make them as bare as possible.  Others 
+believe creating kits to make things easier is the way to go.  I plan 
+on using Sinon next time for stubs.  I read something about how this 
+works and look forward to trying it out. 
 
 
 ## Contact Me
 
-- **Phone/SMS**: [(512)740-9784](tel:+15127409784/)
+- **Phone/SMS**: [(512)740-9784](tel:+15127409784)
 - **Email**: [jonnytest1101@icloud.com](mailto:jonnytest1101@icloud.com)
 - **GitHub**: [@DevJonTaylor](https://www.github.com/devjontaylor)
 - **LinkedIn**: [Vue-Shell](https://www.linkedin.com/in/vue-shell)
@@ -287,5 +296,5 @@ What I did to overcome/how it was helpful...
 
 ## License
 
-[![MIT License](https://img.shields.io/badge/license-MIT-green?style=plastic)](https://github.com/DevJonTaylor/sweaty-shell-team/blob/main/LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-green?style=plastic)](./LICENSE)
 
